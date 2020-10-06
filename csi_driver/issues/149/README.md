@@ -1,5 +1,7 @@
 ## CSI Driver Issue 149
 
+https://github.com/hetznercloud/csi-driver/issues/149
+
 1. `kubectl apply -f volume.yml`
 2. wait until `kubectl get pods -o wide | grep my-csi-app-vol-resize` shows `running`
 3. `kubectl get pvc | grep csi-pvc-vol-resize` should show a volume with size 10G
