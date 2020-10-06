@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: csi-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  volumeMode: Block
+  storageClassName: hcloud-volumes
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: my-csi-app
+spec:
+  containers:
+    - name: my-frontend
+      image: ubuntu
+      command: [ "sleep", "1000000" ]
+      volumeDevices:
+        - name: my-csi-volume
+          devicePath: /dev/xvda
+      
+  volumes:
+    - name: my-csi-volume
+      persistentVolumeClaim:
+        claimName: csi-pvc
