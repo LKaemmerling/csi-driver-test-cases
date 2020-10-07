@@ -1,0 +1,20 @@
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "nginx-hello-world"
+  labels:
+    app: "hello-world"
+  annotations:
+    load-balancer.hetzner.cloud/name: "testk8slb"
+    load-balancer.hetzner.cloud/use-private-ip: "true"
+    load-balancer.hetzner.cloud/location: nbg1
+    load-balancer.hetzner.cloud/network-zone: eu-central
+spec:
+  ports:
+    - name: "http"
+      port: 80
+      targetPort: 80
+  selector:
+    app: "hello-world"
+  type: LoadBalancer

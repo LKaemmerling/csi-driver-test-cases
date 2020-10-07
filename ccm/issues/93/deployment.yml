@@ -1,0 +1,25 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "nginx-hello-world"
+  labels:
+    app: "hello-world"
+spec:
+  selector:
+    matchLabels:
+      app: "hello-world"
+  strategy:
+    type: "Recreate"
+  template:
+    metadata:
+      labels:
+        app: "hello-world"
+    spec:
+      containers:
+        - image: "nginxdemos/hello:plain-text"
+          name: "nginx-hello-world"
+          imagePullPolicy: "Always"
+          ports:
+            - containerPort: 80
+              name: "http"
